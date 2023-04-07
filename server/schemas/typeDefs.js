@@ -1,5 +1,5 @@
 const { gql } = require('apollo-server-express');
-
+//add seller typ, query and mutations
 const typeDefs = gql`
   type Category {
     _id: ID
