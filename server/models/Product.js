@@ -8,9 +8,11 @@ const productSchema = new Schema({
     required: true,
     trim: true
   },
-  //size
+//input for products to be sold, to use enum values for checkbox?
   description: {
-    type: String
+    type: String,
+    enum: ['Small', 'Medium', 'Large'],
+    required: true
   },
   image: {
     type: String
