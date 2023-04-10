@@ -5,7 +5,7 @@ import { useStoreContext } from "../../utils/GlobalState";
 import { ADD_TO_CART, UPDATE_CART_QUANTITY } from "../../utils/actions";
 import { idbPromise } from "../../utils/helpers";
 
-function ProductItem(item) {
+function StoreItem(item) {
   const [state, dispatch] = useStoreContext();
 
   const {
@@ -80,4 +80,4 @@ const handleSizeChange =  (e) => {
   );
 }
 
-export default ProductItem;
+export default StoreItem;
