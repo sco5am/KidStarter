@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { Link } from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
+import { ADD_BUYER, ADD_SELLER } from '../utils/mutations';
 import Auth from '../utils/auth';
-import { ADD_USER } from '../utils/mutations';
 
-function Signup(props) {
+function Signup() {
   const [formState, setFormState] = useState({ email: '', password: '' });
-  const [addUser] = useMutation(ADD_USER);
+  const [addBuyer] = useMutation(ADD_BUYER);
+  const [addSeller] = useMutation(ADD_SELLER);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    const mutationResponse = await addUser({
+    const mutationResponse = await addBuyer({
       variables: {
         email: formState.email,
         password: formState.password,
@@ -18,8 +19,22 @@ function Signup(props) {
         lastName: formState.lastName,
       },
     });
-    const token = mutationResponse.data.addUser.token;
+
+    const token = mutationResponse.data.addBuyer.token;
+    const decodedToken = jwt_decode(token);
+
     Auth.login(token);
+
+    if (decodedToken.isSeller) {
+      await addSeller({
+        variables: {
+          email: formState.email,
+          password: formState.password,
+          firstName: formState.firstName,
+          lastName: formState.lastName,
+        },
+      });
+    }
   };
 
   const handleChange = (event) => {
@@ -32,7 +47,6 @@ function Signup(props) {
 
   return (
     <div className="container my-1">
-
       <h2>Signup</h2>
       <form onSubmit={handleFormSubmit}>
         <div className="flex-row space-between my-2">
@@ -83,4 +97,4 @@ function Signup(props) {
   );
 }
 
-export default  Signup;
+export default Signup;
