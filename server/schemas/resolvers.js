@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Product, Category, Order } = require('../models');
+const { User, Product, Category, Order, Seller } = require('../models');
 const { signToken } = require('../utils/auth');
 //const stripe = require('stripe')('');
 
@@ -40,9 +40,18 @@ const resolvers = {
 
       throw new AuthenticationError('Not logged in');
     },
-    //seller needs auth error
-    seller: async (parent, { _id }) => {
-        return await Product.findById(_id).populate('products');
+    //Seller
+    seller: async (parent, args, context) => {
+        if (context.seller) {
+          const seller = await Seller.findById(context.seller._id).populate({
+            path: 'products.description',
+            populate: 'category'
+          });
+  
+          return seller;
+        }
+  
+        throw new AuthenticationError('Not logged in');
       },
     order: async (parent, { _id }, context) => {
       if (context.user) {
@@ -94,8 +103,15 @@ const resolvers = {
     }
   },
 
-  //add seller mutations 
+ 
   Mutation: {
+//ADDs
+    addSeller: async (parent, args) => {
+        const seller = await Seller.create(args);
+        const token = signToken(seller);
+  
+        return { token, seller };
+      },
     addUser: async (parent, args) => {
       const user = await User.create(args);
       const token = signToken(user);
@@ -113,6 +129,14 @@ const resolvers = {
       }
 
       throw new AuthenticationError('Not logged in');
+    },
+//UPDATES
+    updateSeller: async (parent, args, context) => {
+     if (context.seller) {
+      return await Seller.findByIdAndUpdate(context.seller._id, args, { new: true });
+    }
+
+    throw new AuthenticationError('Not logged in');
     },
     updateUser: async (parent, args, context) => {
       if (context.user) {

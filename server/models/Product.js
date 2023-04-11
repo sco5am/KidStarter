@@ -8,11 +8,6 @@ const productSchema = new Schema({
     required: true,
     trim: true
   },
-  organization: {
-    type: Schema.Types.ObjectId,
-    ref: 'Seller',
-    required: true
-  },
 //input for products to be sold, to use enum values for checkbox?
   description: {
     type: String,

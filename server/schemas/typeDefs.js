@@ -9,7 +9,6 @@ const typeDefs = gql`
   type Product {
     _id: ID
     name: String
-    organization: String
     description: String
     image: String
     quantity: Int
@@ -31,6 +30,17 @@ const typeDefs = gql`
     orders: [Order]
   }
 
+  type Seller {
+    _id: ID
+    guardianPresent: Boolean
+    firstName: String
+    lastName: String
+    orgName: String
+    email: String
+    password: String
+    products: Product
+  }
+
   type Checkout {
     session: ID
   }
@@ -50,9 +60,11 @@ const typeDefs = gql`
   }
 
   type Mutation {
+    addSeller(firstName: String!, lastName: String!, email: String!, password: String!): Auth
     addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
     addOrder(products: [ID]!): Order
     updateUser(firstName: String, lastName: String, email: String, password: String): User
+    updateSeller(firstName: String, lastName: String, orgName: String, location: String, email: String, password: String): Seller
     updateProduct(_id: ID!, quantity: Int!): Product
     login(email: String!, password: String!): Auth
   }
