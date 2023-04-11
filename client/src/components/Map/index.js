@@ -1,5 +1,5 @@
 import React from 'react'
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import { GoogleMap, useJsApiLoader, DistanceMatrixService, DirectionsService } from '@react-google-maps/api';
 
 const containerStyle = {
   width: '400px',
@@ -10,6 +10,7 @@ const center = {
   lat: 40.00686,
   lng: -83.03041
 };
+
 
 function MapComponent() {
   const { isLoaded } = useJsApiLoader({
