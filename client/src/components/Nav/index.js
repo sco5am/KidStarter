@@ -26,7 +26,17 @@ function Nav() {
         <ul className="flex-row">
           <li className="mx-1">
             <Link to="/login">
-              Login/Signup
+              Login
+            </Link>
+          </li>
+          <li className="mx-1">
+            <Link to="/Buyer">
+              Customer Sign-up
+            </Link>
+          </li>
+          <li className="mx-1">
+            <Link to="/Seller">
+              Store Sign-up
             </Link>
           </li>
         </ul>
@@ -38,7 +48,7 @@ function Nav() {
     <header className="flex-row px-1">
       <h1>
         <Link to="/">
-          <span role="img"></span>
+          <span role="img" aria-label="shopping bag">🛍️</span>
           Kid-Starter
         </Link>
       </h1>

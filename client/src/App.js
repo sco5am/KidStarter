@@ -12,7 +12,8 @@ import Home from './pages/Home';
 import Detail from './pages/Detail';
 import NoMatch from './pages/NoMatch';
 import Login from './pages/Login';
-import Signup from './pages/Signup';
+import CustomerSignup from './pages/CustomerSignup';
+import StoreSignup from './pages/StoreSignup';
 import Nav from './components/Nav';
 import { StoreProvider } from './utils/GlobalState';
 import Success from './pages/Success';
@@ -51,8 +52,16 @@ function App() {
                 element={<Home />} 
               />
                 <Route 
-                path="/login" 
-                element={<div><Login/><Signup/></div>}
+                path="/Login" 
+                element={<Login />}
+              />
+                <Route 
+                path="/Seller" 
+                element={<StoreSignup/>}
+              />
+                <Route 
+                path="/Buyer" 
+                element={<CustomerSignup/>}
               />
               <Route 
                 path="/success" 
