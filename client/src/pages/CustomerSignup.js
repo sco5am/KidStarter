@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
-import jwt_decode from 'jwt-decode';
-import { ADD_BUYER, ADD_SELLER } from '../utils/mutations';
-import Auth from '../utils/auth';
+import React, { useState } from "react";
+import { useMutation } from "@apollo/client";
+import { ADD_BUYER } from "../utils/mutations";
+import Auth from "../utils/auth";
 
-function Signup() {
-  const [formState, setFormState] = useState({ email: '', password: '' });
+function CustomerSignup() {
+  const [formState, setFormState] = useState({
+    email: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+  });
   const [addBuyer] = useMutation(ADD_BUYER);
-  const [addSeller] = useMutation(ADD_SELLER);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -17,24 +20,13 @@ function Signup() {
         password: formState.password,
         firstName: formState.firstName,
         lastName: formState.lastName,
+        isSeller: false,
       },
     });
 
     const token = mutationResponse.data.addBuyer.token;
-    const decodedToken = jwt_decode(token);
 
     Auth.login(token);
-
-    if (decodedToken.isSeller) {
-      await addSeller({
-        variables: {
-          email: formState.email,
-          password: formState.password,
-          firstName: formState.firstName,
-          lastName: formState.lastName,
-        },
-      });
-    }
   };
 
   const handleChange = (event) => {
@@ -97,4 +89,4 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default CustomerSignup;
