@@ -1,14 +1,14 @@
 import React from "react";
-import StoreList from "../components/StoreList";
-import StoreMap from "../components/StoreMap";
-import Cart from "../components/Cart";
+// import StoreList from "../components/StoreList";
+// import StoreMap from "../components/StoreMap";
+// import Cart from "../components/Cart";
 
 const Home = () => {
   return (
     <div className="container">
-      <StoreMap />
+      {/* <StoreMap />
       <StoreList />
-      <Cart />
+      <Cart /> */}
     </div>
   );
 };

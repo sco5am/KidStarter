@@ -9,8 +9,8 @@ import {
 import { setContext } from '@apollo/client/link/context';
 
 import Home from './pages/Home';
-import Detail from './pages/Detail';
-import NoMatch from './pages/NoMatch';
+// import Detail from './pages/Detail';
+// import NoMatch from './pages/NoMatch';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Nav from './components/Nav';
@@ -18,6 +18,7 @@ import { StoreProvider } from './utils/GlobalState';
 import Success from './pages/Success';
 import OrderHistory from './pages/OrderHistory';
 import { LOGIN } from './utils/mutations';
+import Map from './pages/Map'
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -63,13 +64,17 @@ function App() {
                 element={<OrderHistory />} 
               />
               <Route 
+                path="/map" 
+                element={<Map />} 
+              />
+              {/* <Route 
                 path="/products/:id" 
                 element={<Detail />} 
               />
               <Route
                 path="*" 
                 element={<NoMatch />} 
-              />
+              /> */}
             </Routes>
           </StoreProvider>
         </div>
