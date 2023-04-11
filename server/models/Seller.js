@@ -24,6 +24,12 @@ const sellerSchema = new Schema({
     required: true,
     trim: true
   },
+  //string for now
+  location: {
+    type: String,
+    required: true,
+    trim: true
+  },
   email: {
     type: String,
     required: true,
