@@ -77,11 +77,6 @@ function App() {
                 element={<Detail />} 
               />
               <Route
-                path ="/drinks"
-                element ={<ProductList/>}
-                />
-              
-              <Route
                 path="*" 
                 element={<NoMatch />} 
               />
