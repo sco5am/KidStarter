@@ -19,7 +19,7 @@ import { StoreProvider } from './utils/GlobalState';
 import Success from './pages/Success';
 import OrderHistory from './pages/OrderHistory';
 import { LOGIN } from './utils/mutations';
-import ProductList from './components/StoreList/StoreList';
+
 
 const httpLink = createHttpLink({
   uri: '/graphql',

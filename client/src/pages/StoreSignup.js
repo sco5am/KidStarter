@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
-import { ADD_SELLER } from '../utils/mutations';
-import Auth from '../utils/auth';
+import React, { useState } from "react";
+import { useMutation } from "@apollo/client";
+import { ADD_SELLER } from "../utils/mutations";
+import Auth from "../utils/auth";
 
 function SellerSignup() {
   const [formState, setFormState] = useState({
     guardianPresent: false,
-    firstName: '',
-    lastName: '',
-    orgName: '',
-    email: '',
-    password: '',
-    products: ''
+    firstName: "",
+    lastName: "",
+    orgName: "",
+    email: "",
+    password: "",
+    products: [],
   });
   const [addSeller] = useMutation(ADD_SELLER);
 
@@ -19,7 +19,7 @@ function SellerSignup() {
     event.preventDefault();
     const mutationResponse = await addSeller({
       variables: {
-        ...formState
+        ...formState,
       },
     });
 
@@ -33,6 +33,35 @@ function SellerSignup() {
     setFormState({
       ...formState,
       [name]: value,
+    });
+  };
+
+  const handleProductChange = (event, index) => {
+    const { name, value } = event.target;
+    const productsCopy = [...formState.products];
+    productsCopy[index] = {
+      ...productsCopy[index],
+      [name]: value,
+    };
+    setFormState({
+      ...formState,
+      products: productsCopy,
+    });
+  };
+
+  const handleAddProduct = () => {
+    setFormState({
+      ...formState,
+      products: [...formState.products, {}],
+    });
+  };
+
+  const handleRemoveProduct = (index) => {
+    const productsCopy = [...formState.products];
+    productsCopy.splice(index, 1);
+    setFormState({
+      ...formState,
+      products: productsCopy,
     });
   };
 
@@ -102,19 +131,57 @@ function SellerSignup() {
             onChange={handleChange}
           />
         </div>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="products">Product IDs:</label>
-          <input
-            placeholder="Product IDs"
-            name="products"
-            type="products"
-            id="products"
-            onChange={handleChange}
-          />
-        </div>
+
+        {/* Product section */}
+        <h4>Add Products:</h4>
+        {formState.products.map((product, index) => (
+          <div key={index}>
+            <div className="flex-row space-between my-2">
+              <label htmlFor={`productName-${index}`}>Product Name:</label>
+              <input
+                placeholder="Product Name"
+                name="productName"
+                type="text"
+                id={`productName-${index}`}
+                value={product.productName || ""}
+                onChange={(event) => handleProductChange(event, index)}
+              />
+            </div>
+            <div className="flex-row space-between my-2">
+              <label htmlFor={`productPrice-${index}`}>Price:</label>
+              <input
+                placeholder="Price"
+                name="productPrice"
+                type="number"
+                id={`productPrice-${index}`}
+                value={product.productPrice || ""}
+                onChange={(event) => handleProductChange(event, index)}
+              />
+            </div>
+            <div className="flex-row space-between my-2">
+              <label htmlFor={`productDescription-${index}`}>
+                Description:
+              </label>
+              <textarea
+                placeholder="Description"
+                name="productDescription"
+                id={`productDescription-${index}`}
+                value={product.productDescription || ""}
+                onChange={(event) => handleProductChange(event, index)}
+              />
+            </div>
+            <button type="button" onClick={() => handleRemoveProduct(index)}>
+              Remove Product
+            </button>
+          </div>
+        ))}
+        <button type="button" onClick={handleAddProduct}>
+          Add Product
+        </button>
+
         <div className="flex-row flex-end">
           <button type="submit">Submit</button>
-          </div>
+        </div>
       </form>
     </div>
   );
