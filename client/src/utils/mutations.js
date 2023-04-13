@@ -31,23 +31,20 @@ export const ADD_ORDER = gql`
 
 export const ADD_BUYER = gql`
   mutation addBuyer(
-    $email: String!
-    $password: String!
     $firstName: String!
     $lastName: String!
+    $email: String!
+    $password: String!
   ) {
     addBuyer(
-      email: $email
-      password: $password
       firstName: $firstName
       lastName: $lastName
+      email: $email
+      password: $password
     ) {
       token
       buyer {
         _id
-        firstName
-        lastName
-        email
       }
     }
   }
