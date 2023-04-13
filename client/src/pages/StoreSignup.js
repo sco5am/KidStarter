@@ -162,13 +162,17 @@ function SellerSignup() {
               <label htmlFor={`productDescription-${index}`}>
                 Description:
               </label>
-              <textarea
-                placeholder="Description"
+              <select
                 name="productDescription"
                 id={`productDescription-${index}`}
                 value={product.productDescription || ""}
                 onChange={(event) => handleProductChange(event, index)}
-              />
+              >
+                <option value="">Select a size</option>
+                <option value="Small">Small</option>
+                <option value="Medium">Medium</option>
+                <option value="Large">Large</option>
+              </select>
             </div>
             <button type="button" onClick={() => handleRemoveProduct(index)}>
               Remove Product

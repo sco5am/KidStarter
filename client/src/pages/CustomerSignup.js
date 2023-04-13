@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom';
 import { useMutation } from "@apollo/client";
 import { ADD_BUYER } from "../utils/mutations";
 import Auth from "../utils/auth";
@@ -7,8 +8,8 @@ function CustomerSignup() {
   const [formState, setFormState] = useState({
     email: "",
     password: "",
-    firstName: "",
-    lastName: "",
+    // firstName: "",
+    // lastName: "",
   });
   const [addBuyer] = useMutation(ADD_BUYER);
 
@@ -39,6 +40,7 @@ function CustomerSignup() {
 
   return (
     <div className="container my-1">
+       <Link to="/login">← Go to Login</Link>
       <h2>Signup</h2>
       <form onSubmit={handleFormSubmit}>
         <div className="flex-row space-between my-2">
