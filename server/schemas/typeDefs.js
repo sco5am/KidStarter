@@ -38,7 +38,7 @@ const typeDefs = gql`
     orgName: String
     email: String
     password: String
-    products: Product
+    products: [Product]
   }
 
   type Checkout {
@@ -57,7 +57,7 @@ const typeDefs = gql`
     user: User
     order(_id: ID!): Order
     checkout(products: [ID]!): Checkout
-    seller(_id: ID!): Product
+    seller(_id: ID!): [Product]
   }
 
   type Mutation {

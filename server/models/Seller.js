@@ -41,11 +41,12 @@ const sellerSchema = new Schema({
     minlength: 5
   },
   //correct values?
-  products: {
+ 
+  products: [{
     type: Schema.Types.ObjectId,
-    ref: 'Product',
-    required: true 
-  }
+    ref: 'Product'
+  }]
+
 });
 
 // sets up pre-save middleware to create password

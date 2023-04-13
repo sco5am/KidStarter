@@ -1,7 +1,7 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { User, Product, Category, Order, Seller } = require('../models');
 const { signToken } = require('../utils/auth');
-//const stripe = require('stripe')('');
+const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
 const resolvers = {
   Query: {
@@ -43,10 +43,7 @@ const resolvers = {
     //Seller
     seller: async (parent, args, context) => {
         if (context.seller) {
-          const seller = await Seller.findById(context.seller._id).populate({
-            path: 'products.description',
-            populate: 'category'
-          });
+          const seller = await Seller.findById(context.seller._id).populate({Product});
   
           return seller;
         }
