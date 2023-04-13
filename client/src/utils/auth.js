@@ -6,7 +6,14 @@ class AuthService {
   }
 
   getProfile() {
-    return decode(this.getToken());
+    const token = this.getToken();
+    const decoded = decode(token);
+    return decoded;
+  }
+
+  getUserType() {
+    const profile = this.getProfile();
+    return profile ? profile.userType : null;
   }
 
   loggedIn() {
