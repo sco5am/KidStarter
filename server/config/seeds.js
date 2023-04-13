@@ -1,5 +1,5 @@
 const db = require('./connection');
-const { User, Product, Category } = require('../models');
+const { User, Product, Category, Seller } = require('../models');
 
 db.once('open', async () => {
   await Category.deleteMany();
@@ -15,8 +15,6 @@ db.once('open', async () => {
   const products = await Product.insertMany([
     {
       name: 'Lemonade',
-      //to change to array from seller input 
-      organization: 'Cbus T-ball league',
       description:
         'Small',
       image: 'lemonade.png',
@@ -26,7 +24,6 @@ db.once('open', async () => {
     },
     {
         name: 'Lemonade',
-        organization: 'Cville Girl Scouts',
         description:
           'Medium',
         image: 'lemonade.png',
@@ -36,7 +33,6 @@ db.once('open', async () => {
     },
     {
         name: 'Lemonade',
-        organization: 'Steves Camp Fund',
         description:
           'Large',
         image: 'lemonade.png',
@@ -70,6 +66,34 @@ db.once('open', async () => {
   });
 
   console.log('users seeded');
+
+  //Seller seeds
+  await Seller.deleteMany();
+
+  await Seller.create({
+    guardianPresent: 'true',
+    firstName: 'Suzy',
+    lastName: 'Smith',
+    orgName: 'Girl Scouts',
+    location: '810 Hucklberry Lane Columbus Ohio',
+    email: 'ssmith@testmail.com',
+    password: 'password12345',
+    products: [products[0]._id, products[0]._id, products[1]._id]
+  });
+
+  await Seller.create({
+    guardianPresent: 'true',
+    firstName: 'Jerry',
+    lastName: 'Miller',
+    orgName: 'T-ball',
+    location: '700 Daisy Lane Dayton Ohio',
+    email: 'millerh@testmail.com',
+    password: 'password12345',
+    products: [products[0]._id, products[1]._id]
+  });
+
+  console.log('sellers seeded');
+
 
   process.exit();
 });
