@@ -7,8 +7,8 @@ function Nav() {
     if (Auth.loggedIn()) {
       if (Auth.getUserType() === "seller") {
         return (
-          <ul className="flex-row">
-            <li className="mx-1">
+          <ul className="nav nav-tabs">
+            <li className="nav-item">
               <Link to="/storeDashboard">Store Dashboard</Link>
             </li>
             <li className="mx-1">
@@ -20,8 +20,8 @@ function Nav() {
         );
       } else {
         return (
-          <ul className="flex-row">
-            <li className="mx-1">
+          <ul className="nav nav-tabs">
+            <li className="nav-item">
               <Link to="/orderHistory">Order History</Link>
             </li>
             <li className="mx-1">
@@ -34,14 +34,14 @@ function Nav() {
       }
     } else {
       return (
-        <ul className="flex-row">
-          <li className="mx-1">
+        <ul className="nav nav-tabs">
+            <li className="nav-item">
             <Link to="/login">Login</Link>
           </li>
-          <li className="mx-1">
+          <li className="nav-item">
             <Link to="/Buyer">Customer Sign-up</Link>
           </li>
-          <li className="mx-1">
+          <li className="nav-item">
             <Link to="/Seller">Store Sign-up</Link>
           </li>
         </ul>
@@ -50,7 +50,7 @@ function Nav() {
   }
 
   return (
-    <header className="flex-row px-1">
+    <header className="banner">
       <h1>
         <Link to="/">
           <span role="img" aria-label="lemon">
