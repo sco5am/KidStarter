@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { ADD_BUYER } from "../utils/mutations";
+import { ADD_USER } from "../utils/mutations";
 import Auth from "../utils/auth";
 
 function CustomerSignup() {
@@ -10,7 +10,7 @@ function CustomerSignup() {
     // firstName: "",
     // lastName: "",
   });
-  const [addBuyer] = useMutation(ADD_BUYER);
+  const [addBuyer] = useMutation(ADD_USER);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -24,7 +24,7 @@ function CustomerSignup() {
       },
     });
 
-    const token = mutationResponse.data.addBuyer.token;
+    const token = mutationResponse.data.addUser.token;
 
     Auth.login(token);
   };
