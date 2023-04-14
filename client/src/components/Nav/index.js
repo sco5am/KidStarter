@@ -44,6 +44,9 @@ function Nav() {
           <li className="nav-item">
             <Link to="/Seller">Store Sign-up</Link>
           </li>
+          <li className="nav-item">
+            <Link to="/Store">Find a Store!</Link>
+          </li>
         </ul>
       );
     }

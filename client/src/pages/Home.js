@@ -1,14 +1,17 @@
 import React from "react";
-import StoreList from "../components/StoreList/StoreList"
-import Cart from "../components/Cart";
+import { Link } from 'react-router-dom';
+
+
 
 const Home = () => {
   return (
     <div className="container">
-      <StoreList/>
-      <Cart />
+      <h1>title text</h1>
+      <p>Here is some txt</p>
+      <Link to="/Store"> Find a Store!</Link>
     </div>
   );
 };
+
 
 export default Home;
