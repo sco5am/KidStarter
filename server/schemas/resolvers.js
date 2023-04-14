@@ -40,6 +40,7 @@ const resolvers = {
 
       throw new AuthenticationError('Not logged in');
     },
+
     //Seller
     seller: async (parent, args, context) => {
         if (context.seller) {
@@ -50,6 +51,7 @@ const resolvers = {
   
         throw new AuthenticationError('Not logged in');
       },
+
     order: async (parent, { _id }, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id).populate({
