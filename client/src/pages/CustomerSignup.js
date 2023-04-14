@@ -1,24 +1,31 @@
-import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
-import { Link } from 'react-router-dom';
-import Auth from '../utils/auth';
-import { ADD_USER } from '../utils/mutations';
+import React, { useState } from "react";
+import { useMutation } from "@apollo/client";
+import { ADD_USER } from "../utils/mutations";
+import Auth from "../utils/auth";
 
-function Signup(props) {
-  const [formState, setFormState] = useState({ email: '', password: '' });
-  const [addUser] = useMutation(ADD_USER);
+function CustomerSignup() {
+  const [formState, setFormState] = useState({
+    email: "",
+    password: "",
+    // firstName: "",
+    // lastName: "",
+  });
+  const [addBuyer] = useMutation(ADD_USER);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    const mutationResponse = await addUser({
+    const mutationResponse = await addBuyer({
       variables: {
         email: formState.email,
         password: formState.password,
         firstName: formState.firstName,
         lastName: formState.lastName,
+        isSeller: false,
       },
     });
+
     const token = mutationResponse.data.addUser.token;
+
     Auth.login(token);
   };
 
@@ -32,7 +39,6 @@ function Signup(props) {
 
   return (
     <div className="container my-1">
-
       <h2>Signup</h2>
       <form onSubmit={handleFormSubmit}>
         <div className="flex-row space-between my-2">
@@ -83,4 +89,4 @@ function Signup(props) {
   );
 }
 
-export default  Signup;
+export default CustomerSignup;

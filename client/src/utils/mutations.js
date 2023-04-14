@@ -49,3 +49,27 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+export const ADD_SELLER = gql`
+  mutation addSeller(
+    $email: String!
+    $password: String!
+    $firstName: String!
+    $lastName: String!
+  ) {
+    addSeller(
+      email: $email
+      password: $password
+      firstName: $firstName
+      lastName: $lastName
+    ) {
+      token
+      seller {
+        _id
+        firstName
+        lastName
+        email
+      }
+    }
+  }
+`;

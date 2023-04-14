@@ -24,6 +24,12 @@ const sellerSchema = new Schema({
     required: true,
     trim: true
   },
+  //string for now
+  location: {
+    type: String,
+    required: true,
+    trim: true
+  },
   email: {
     type: String,
     required: true,
@@ -35,11 +41,12 @@ const sellerSchema = new Schema({
     minlength: 5
   },
   //correct values?
-  products: {
+ 
+  products: [{
     type: Schema.Types.ObjectId,
-    ref: 'Product',
-    required: true 
-  }
+    ref: 'Product'
+  }]
+
 });
 
 // sets up pre-save middleware to create password
