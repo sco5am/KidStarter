@@ -8,7 +8,7 @@
 /*Root groups variables throughout code to make it easier to change*/
 /*color palette*/
 :root {
-    --primary: rgb(245, 238, 47); 
+    --primary: rgb(8, 8, 8); 
     --secondary: rgb(194, 242, 121);
     --tertiary: rgb(91, 121, 177);
     --dark: rgb(4, 38, 71);
