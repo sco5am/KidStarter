@@ -1,10 +1,12 @@
 import React from "react";
 import StoreList from "../components/StoreList/StoreList"
 import Cart from "../components/Cart";
+import Map from "../components/Map";
 
 const Store = () => {
     return (
       <div className="container">
+        {/* <Map/> */}
         <StoreList/>
         <Cart />
       </div>
