@@ -1,5 +1,5 @@
 # KidStarter (Ohio State University Coding Bootcamp Group Final Project)
-## Created by: William Anderson, Ethan Alexander, Serge Omadjambe, and David Stumpe
+## Created by: Kristin Brewer, Ethan Alexander, Samuel Oaks, Yizhong Wang and. David Stumpe
 #### https://frozen-mesa-16052.herokuapp.com/
 
 ## Description
