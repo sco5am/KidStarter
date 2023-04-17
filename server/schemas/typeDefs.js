@@ -39,6 +39,7 @@ const typeDefs = gql`
     email: String
     password: String
     products: [Product]
+    location:  String
   }
 
   type Checkout {
@@ -58,6 +59,7 @@ const typeDefs = gql`
     order(_id: ID!): Order
     checkout(products: [ID]!): Checkout
     seller(_id: ID!): [Product]
+    store:[Seller]
   }
 
   type Mutation {
