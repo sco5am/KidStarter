@@ -47,6 +47,31 @@ export const QUERY_CATEGORIES = gql`
     }
   }
 `;
+export const QUERY_STORES = gql`
+  {
+    store {
+      _id
+      guardianPresent 
+      firstName
+      lastName
+      orgName
+      email
+      location
+      products{ 
+        _id
+        name
+        description
+        image
+        quantity
+        price
+        category{
+          _id
+          name
+        }
+      }
+    }
+  }
+`;
 
 export const QUERY_USER = gql`
   {
