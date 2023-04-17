@@ -3,7 +3,7 @@ import StoreItem from '../StoreItem/StoreItem.js';
 import { useStoreContext } from '../../utils/GlobalState';
 import { UPDATE_PRODUCTS } from '../../utils/actions';
 import { useQuery } from '@apollo/client';
-import { QUERY_PRODUCTS } from '../../utils/queries';
+import { QUERY_STORES } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers';
 import spinner from '../../assets/spinner.gif';
 
@@ -12,58 +12,52 @@ function ProductList() {
 
   const { currentCategory } = state;
 
-  const { loading, data } = useQuery(QUERY_PRODUCTS);
+  const { loading, data } = useQuery(QUERY_STORES);
+  const stores = data?.store|| []
+  console.log(stores);
+  // useEffect(() => {
+  //   if (data) {
+  //     dispatch({
+  //       type: UPDATE_PRODUCTS,
+  //       products: data.products,
+  //     });
+  //     data.products.forEach((product) => {
+  //       idbPromise('products', 'put', product);
+  //     });
+  //   } else if (!loading) {
+  //     idbPromise('products', 'get').then((products) => {
+  //       dispatch({
+  //         type: UPDATE_PRODUCTS,
+  //         products: products,
+  //       });
+  //     });
+  //   }
+  // }, [data, loading, dispatch]);
 
-  useEffect(() => {
-    if (data) {
-      dispatch({
-        type: UPDATE_PRODUCTS,
-        products: data.products,
-      });
-      data.products.forEach((product) => {
-        idbPromise('products', 'put', product);
-      });
-    } else if (!loading) {
-      idbPromise('products', 'get').then((products) => {
-        dispatch({
-          type: UPDATE_PRODUCTS,
-          products: products,
-        });
-      });
-    }
-  }, [data, loading, dispatch]);
+  // function filterProducts() {
+  //   if (!currentCategory) {
+  //     return state.products;
+  //   }
 
-  function filterProducts() {
-    if (!currentCategory) {
-      return state.products;
-    }
-
-    return state.products.filter(
-      (product) => product.category._id === currentCategory
-    );
-  }
+  //   return state.products.filter(
+  //     (product) => product.category._id === currentCategory
+  //   );
+  // }
 
   return (
     <div className="my-2">
       <h2>Our Products:</h2>
-      {state.products.length ? (
-        <div className="flex-row">
-          {filterProducts().map((product) => (
-            <StoreItem
-              key={product._id}
-              _id={product._id}
-              image={product.image}
-              name={product.name}
-              price={product.price}
-              quantity={product.quantity}
-              category ={product.category}
-              description = {product.description}
-            />
-          ))}
+      {stores.map(store=>(
+        <div className="card" key = {store._id}>
+        <div className="card-body">
+          <h5 className="card-title">{store.orgName}</h5>
+          <h6 className="card-subtitle mb-2 text-body-secondary">{store.location}</h6>
+          <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <a href="#" className="card-link">Card link</a>
+          <a href="#" className="card-link">Another link</a>
         </div>
-      ) : (
-        <h3>You haven't added any products yet!</h3>
-      )}
+      </div>
+      ))}
       {loading ? <img src={spinner} alt="loading" /> : null}
     </div>
   );
